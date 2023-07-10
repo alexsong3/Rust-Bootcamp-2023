@@ -1,49 +1,34 @@
 fn main() {
-    // println!("Hello, Rust Bootcamp by VBI Academy!");
-
-    // assert_eq!(count_char_occurrences("Hello", 'l'), 2);
-    // assert_eq!(count_char_occurrences("Rust is fun", 'u'), 2);
-
-    // assert_eq!(sum_even_numbers(&[1, 2, 3, 4, 5, 6]), 12);
-    // assert_eq!(sum_even_numbers(&[10, 20, 30, 40, 50]), 150);
-
-    // let numbers = [2.5, 4.8, 6.3, 1.7, 3.9];
-    let numbers = [];
-    let result = calculate_average(&numbers);
-    // println!("result {:?}", result);
-    assert_eq!(result, 3.84);
+    exercise3()
 }
 
-// fn count_char_occurrences(string: &str, ch: char) -> usize {
-//     // todo!()
-//     let res = string.chars().into_iter().filter(|c| c == &ch).count();
-//     println!("count res {:?}", res);
-//     res
-//     // 0
-// }
+fn exercise3() {
+    let values: Vec<f64> = vec![
+        2817.42, 2162.17, 3756.57, 2817.42, -2817.42, 946.9, 2817.42, 964.42, 795.43, 3756.57,
+        139.34, 903.58, -3756.57, 939.14, 828.04, 1120.04, 604.03, 3354.74, 2748.06, 1470.8,
+        4695.71, 71.11, 2391.48, 331.29, 1214.69, 863.52, 7810.01,
+    ];
 
-// fn sum_even_numbers(numbers: &[i32]) -> i32 {
-//     // todo!()
-//     let total: i32 = numbers.iter().filter(|n| (*n % 2) == 0).sum();
-//     println!("even {:?}", total);
-//     total
-// }
+    let values_number = values.len();
 
-fn calculate_average(numbers: &[f64]) -> f64 {
-    // todo!()
+    let additions: Vec<_> = vec![0];
 
-    // let total: f64 = numbers.iter().sum();
-    // println!("total {:?}", total);
-    // let res = (total / numbers.len() as f64) as f64;
-    // println!("average {:?}", res);
-    // res
-    // 0.0
+    println!("{:?}", values_number);
 
-    let total = ((numbers.iter().sum::<f64>() as f64) / (numbers.len() as f64)) as f64;
-    // println!("total {:?}", total);
-    if total > 0.0 {
-        total
-    } else {
-        0.0
+    // println!("add {:?}", &additions.len());
+    let len_add = additions.len() as i32;
+    println!("add {:?}", len_add);
+
+    while len_add > 0 {
+        // println!("add {:?}", additions.len());
+        let mut addition: f64 = 0.0;
+
+        // Sumar valores en additions
+        for element_index in additions.iter() {
+            // println!("index {:?}", element_index);
+            let addition_aux: f64 = values[*element_index];
+            println!("add res {:?}", addition_aux);
+            addition = addition_aux + addition;
+        }
     }
 }
