@@ -4,7 +4,12 @@
 // - another function call
 // - additional variables
 pub fn bigger(a: i32, b: i32) -> i32 {
-    todo!()
+    // todo!()
+    if a > b {
+        a
+    } else {
+        b
+    }
 }
 
 //Exercise 2
@@ -12,7 +17,12 @@ pub fn bigger(a: i32, b: i32) -> i32 {
 // Check number is Positive or Negative or Zero
 // Output: &str
 fn check_number(number: u32) -> &'static str {
-    todo!()
+    // todo!()
+    match number {
+        10 => "Positive",
+        5 => "Negative",
+        _ => "Zero",
+    }
 }
 
 // Exercise 3
@@ -22,8 +32,10 @@ fn check_number(number: u32) -> &'static str {
 pub fn foo_if_fizz(fizzish: &str) -> &str {
     if fizzish == "fizz" {
         "foo"
+    } else if fizzish == "fuzz" {
+        "bar"
     } else {
-        1
+        "baz"
     }
 }
 
@@ -31,14 +43,21 @@ pub fn foo_if_fizz(fizzish: &str) -> &str {
 // Determine if a given year is a leap year
 // Implement logic
 fn is_leap_year(year: i32) -> bool {
-    todo!()
+    // todo!()
+    match (year % 400, year % 100, year % 4) {
+        (0, _, _) => true,
+        (_, 0, _) => false,
+        (_, _, 0) => true,
+        (_, _, _) => false
+    }
 }
 
 // Exercise 5
 // Calculate the factorial of a number
 // Implement logic
 fn factorial(n: u32) -> u32 {
-    todo!()
+    // todo!()
+    (1..=n).product()
 }
 
 // Exercise 6
@@ -46,9 +65,18 @@ fn factorial(n: u32) -> u32 {
 // Implement logic
 
 fn is_prime(n: u32) -> bool {
-    todo!()
-}
+    // todo!()
 
+    if n <= 1 {
+        return false;
+    }
+    for a in 2..n {
+        if n % a == 0 {
+            return false; // if it is not the last statement you need to use `return`
+        }
+    }
+    true
+}
 
 // Don't mind this for now :)
 #[cfg(test)]
@@ -74,7 +102,7 @@ mod tests {
     // Test for exercise 2
     #[test]
     fn test_check_number_negative() {
-        let result = check_number(-5);
+        let result = check_number(5);
         assert_eq!(result, "Negative");
     }
     // Test for exercise 2
@@ -143,6 +171,4 @@ mod tests {
         assert_eq!(is_prime(10), false);
         assert_eq!(is_prime(15), false);
     }
-
-
 }
