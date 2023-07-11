@@ -37,7 +37,7 @@ fn exercise3() {
 
     let values_number = &values.len();
 
-    let additions: Vec<_> = vec![0];
+    let additions: Vec<usize> = vec![0];
 
     println!("{:?}", values_number);
 
@@ -49,6 +49,16 @@ fn exercise3() {
             let addition_aux: f64 = values[*element_index];
             addition = addition_aux + addition;
         }
+
+        // for &element_index in additions.iter() {
+        //     let addition_aux: f64 = values[element_index];
+        //     addition = addition_aux + addition;
+        // }
+
+        // for &element_index in &additions { // &additions = additions.iter()
+        //     let addition_aux: f64 = values[element_index];
+        //     addition = addition_aux + addition;
+        // }
     }
 }
 
@@ -56,8 +66,15 @@ fn exercise3() {
 // Make it compile
 fn exercise4(value: u32) -> String {
     let str_value = value.to_string(); // Convert u32 to String
-    let str_ref: String = str_value.to_string(); // Obtain a reference to the String
+    let str_ref: String = str_value; // Obtain a reference to the String
     str_ref // Return the reference to the String
+}
+
+fn exercise_4(value: u32) -> &'static str {
+    match value {
+        0 => "Zero",
+        _ => "Unknow"
+    }
 }
 
 // Exercise 5
@@ -72,8 +89,9 @@ fn exercise5() {
         Some(child) => child,
         None => {
             let value = "3.0".to_string();
-            my_map.insert(key, value.clone());
-            return // HERE IT FAILS
+            my_map.insert(key, value);
+            // &value // HERE IT FAILS
+            my_map.get(&key).unwrap()
         }
     };
 
@@ -86,11 +104,11 @@ fn exercise5() {
 use std::io;
 
 fn exercise6() {
-    let mut prev_key: &str = "";
+    // let mut prev_key: &str = "";
 
     for line in io::stdin().lines() {
         let s = line.unwrap();
-
+        let mut prev_key: &str = "";
         let data: Vec<&str> = s.split("\t").collect();
         if prev_key.len() == 0 {
             prev_key = data[0];
@@ -98,15 +116,36 @@ fn exercise6() {
     }
 }
 
+fn exercise_6() {
+    let mut prev_key = String::new();
+
+    for line in io::stdin().lines() {
+        let s = line.unwrap();
+
+        let data: Vec<&str> = s.split("\t").collect();
+        if prev_key.len() == 0 {
+            prev_key = data[0].to_owned();
+        }
+    }
+}
+
 // Exercise 7
 // Make it compile
 fn exercise7() {
-    let mut v: Vec<&str> = Vec::new();
+    // let mut v: Vec<&str> = Vec::new();
+    // {
+    //     let chars = [b'x', b'y', b'z'];
+    //     let s: &str = std::str::from_utf8(&chars).unwrap();
+    //     v.push(&s);
+    // }
+
+    let mut v: Vec<String> = Vec::new();
     {
         let chars = [b'x', b'y', b'z'];
         let s: &str = std::str::from_utf8(&chars).unwrap();
-        v.push(&s);
+        v.push(s.to_string());
     }
+    println!("{:?}", v);
     println!("{:?}", v);
 }
 
