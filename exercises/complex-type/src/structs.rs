@@ -2,22 +2,25 @@
 // Fix the error
 // Make it compile
 // Run test
+#[derive(Debug, PartialEq)]
 struct Person {
     name: String,
     age: u8,
-    hobby: String
+    hobby: String,
 }
-fn exercise1() -> Person {
-    let age = 30;
-    // Hobby = Rust 
-    let p = Person {
-        name: String::from("sunface"),
-        age,
-        hobby: String::from("Rust")
-    };
+// impl Person {
+    fn exercise1() -> Person {
+        let age = 30;
+        // Hobby = Rust
+        let p = Person {
+            name: String::from("sunface"),
+            age,
+            hobby: String::from("Rust"),
+        };
 
-    p
-}
+        p
+    }
+// }
 
 // Exercise 2
 // Fix the error
@@ -25,7 +28,7 @@ fn exercise1() -> Person {
 // Run test
 
 // Define the struct
-struct Agent  {
+struct Agent {
     name: String,
     age: u32,
 }
@@ -39,12 +42,14 @@ impl Agent {
 
     // Get the name of the person
     fn get_name(&self) -> &str {
-        todo!()
+        // todo!()
+        self.name.as_str()
     }
 
     // Get the age of the person
     fn get_age(&self) -> u32 {
-        todo!()
+        // todo!()
+        self.age
     }
 }
 
@@ -61,31 +66,32 @@ impl Calculator {
         Calculator { value: 0 }
     }
 
-    fn add(&self, num: i32) {
+    fn add(&mut self, num: i32) {
         self.value += num;
     }
 
-    fn subtract(mut self, num: i32) {
+    fn subtract(&mut self, num: i32) {
         self.value -= num;
     }
-    fn clear(self) {
+
+    fn clear(&mut self) {
         self.value = 0;
     }
 
-    fn get_value(self) -> i32 {
+    fn get_value(&self) -> i32 {
         self.value
     }
 }
 
 // Exercise 4
 // Make it compile
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct User {
     first: String,
     last: String,
     age: u32,
 }
-
+//https://stackoverflow.com/questions/58422438/struct-with-partial-move-errors
 fn exercise4() {
     let u1 = User {
         first: String::from("John"),
@@ -95,12 +101,10 @@ fn exercise4() {
 
     let u2 = User {
         first: String::from("Mary"),
-        ..u1
-        
+        ..u1.clone()
     };
 
     println!("user: {:#?}", u1);
-
 }
 
 // Exercise 5
@@ -121,11 +125,9 @@ fn exercise5() {
         int_val: 20,
     });
 
-    
-    let moved = foos[0];
+    let moved = &foos[0];
 
-    
-    let moved_field = foos[0].str_val;
+    let moved_field = &foos[0].str_val;
 }
 
 // Exercise 6
@@ -153,12 +155,18 @@ impl Package {
         }
     }
 
-    fn is_international(&self) -> ??? {
+    fn is_international(&self) -> bool {
         // Something goes here...
+        if self.sender_country != self.recipient_country {
+            true
+        } else {
+            false
+        }
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
+    fn get_fees(&self, cents_per_gram: i32) -> i32 {
         // Something goes here...
+        self.weight_in_grams * cents_per_gram
     }
 }
 
@@ -174,10 +182,9 @@ mod tests {
         let p_expectation = Person {
             name: String::from("sunface"),
             age: 30,
-            hobby:String::from("Rust") 
+            hobby: String::from("Rust"),
         };
         assert_eq!(p, p_expectation);
-        
     }
 
     // Test for exercise 2
@@ -205,9 +212,7 @@ mod tests {
 
         calculator.clear();
         assert_eq!(calculator.get_value(), 0);
-
     }
-
 
     // Test for exercise 6
     #[test]
@@ -253,5 +258,4 @@ mod tests {
         assert_eq!(package.get_fees(cents_per_gram), 4500);
         assert_eq!(package.get_fees(cents_per_gram * 2), 9000);
     }
-
 }
