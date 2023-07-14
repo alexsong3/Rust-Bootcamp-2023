@@ -28,3 +28,8 @@ The goal of the course is to teach you basic Rust.
 ## Contact us
 + Discord:https://discord.gg/XgkcZyM8EC
 + Facebook: https://www.facebook.com/groups/vietnamblockchaininnovation
+
+
++ chạy command để test
+cargo test --test generic-type
+cargo test --test traits
