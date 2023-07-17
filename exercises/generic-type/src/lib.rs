@@ -62,14 +62,24 @@ fn find_max<T: std::cmp::Ord>(collection: &[T]) -> Option<&T> {
 // Reverse the elements in a collection
 // Make it compile
 // Run tests
-fn reverse_collection<T>(collection: &[T]) {
+fn reverse_collection<T: std::fmt::Debug>(collection: &mut [T]) {
+    // todo!()
+    // println!("aaa {:#?}", collection);
+    // let res: Vec<T> = collection.into_iter().rev();
+    // println!("bbb {:#?}", res);
     todo!()
+    // res
 }
 
 // Exercise 6
 // Function to check if a collection contains a specific value
-fn contains_value<T>(collection: &[T], value: &T) -> bool {
-    todo!()
+fn contains_value<T: std::fmt::Debug + std::cmp::PartialEq>(collection: &[T], value: &T) -> bool {
+    // println!("aaa {:#?} b {:#?}", collection, value);
+    // todo!()
+    let res = collection.iter().find(|x| *x == value).is_some();
+    res
+    // println!("ddd {:#?}", res);
+    // true
 }
 
 // Unit tests
