@@ -60,7 +60,7 @@ pub struct Atm {
 // Implement trait Default for Auth 
 // return Waiting status 
 impl Default for Auth {
-    
+    fn default() -> Self;
 }
 
 

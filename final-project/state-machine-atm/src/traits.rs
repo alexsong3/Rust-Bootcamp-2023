@@ -15,7 +15,6 @@ pub trait StateMachine {
 }
 
 
-
 // Simple helper to do some hashing.
 fn hash<T>(t: &T) -> u64 {
     todo!("Final Project");
