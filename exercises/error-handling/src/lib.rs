@@ -2,22 +2,43 @@
 // Make it compile in unit test
 // Run tests
 // Hint: Convert Option to Result
-fn generate_nametag_text(name: String) -> Option<String> {
+// pub enum Result<T, E> {
+//     Ok(T),
+//     Err(E),
+// }
+
+fn generate_nametag_text(name: String) -> Result<String, String> {
     if name.is_empty() {
         // Empty names aren't allowed.
-        None
+        // None
+        Err("`name` was empty; it must be nonempty.".into())
+        // todo!()
     } else {
-        Some(format!("Hi! My name is {}", name))
+        // Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
+        // todo!()
     }
 }
+
 // Exercise 2
 // Make it compile in unit test
 // Run tests
 // Hint: &str to integer conversion by using parse method and return Result
-use std::num::ParseIntError;
+// use std::num::ParseIntError;
 
-fn parse_number(s: &str) -> Result<i32, ParseIntError> {
-    todo!()
+fn parse_number(s: &str) -> Result<i32, String> {
+    let res = s.parse::<i32>();
+    // println!("aaa {:?}", res.clone().ok().is_some());
+    // println!("aaa {:?}", &res.clone().unwrap());
+    if res.clone().ok().is_some() {
+        let re = &res.unwrap();
+        Ok(*re)
+        // todo!()
+    } else {
+        // println!("aaa {:?}", &res);
+        Err("invalid digit found in string".parse().unwrap())
+        // todo!()
+    }
 }
 
 // Exercise 3
@@ -35,8 +56,14 @@ enum CreationError {
 
 impl PositiveNonzeroInteger {
     fn new(value: i64) -> Result<PositiveNonzeroInteger, CreationError> {
-        // Hmm...? Why is this only returning an Ok value?
-        Ok(PositiveNonzeroInteger(value as u64))
+        if value < 0 {
+            Err(CreationError::Negative)
+        } else if value == 0 {
+            Err(CreationError::Zero)
+        } else {
+            // Hmm...? Why is this only returning an Ok value?
+            Ok(PositiveNonzeroInteger(value as u64))
+        }
     }
 }
 
