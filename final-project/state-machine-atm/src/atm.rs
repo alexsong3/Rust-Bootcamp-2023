@@ -13,9 +13,6 @@ pub enum Key {
     Enter,
 }
 
-
-
-
 /// Something you can do to the ATM
 pub enum Action {
     /// Swipe your card at the ATM. The attached value is the hash of the pin
@@ -37,9 +34,6 @@ enum Auth {
     Authenticated,
 }
 
-
-
-
 /// The ATM. When a card is swiped, the ATM learns the correct pin's hash.
 /// It waits for you to key in your pin. You can press as many numeric keys as
 /// you like followed by enter. If the pin is incorrect, your card is returned
@@ -55,19 +49,20 @@ pub struct Atm {
     keystroke_register: Vec<Key>,
 }
 
-
 //TODO
-// Implement trait Default for Auth 
-// return Waiting status 
+// Implement trait Default for Auth
+// return Waiting status
 impl Default for Auth {
-    fn default() -> Self;
+    fn default() -> Self {
+        Auth::Waiting
+    }
 }
-
 
 //TODO
 // Implement trait From  for &str
 // Convert  elements in Key to &str
 impl From<Key> for &str {
+    
 }
 
 impl StateMachine for Atm {
