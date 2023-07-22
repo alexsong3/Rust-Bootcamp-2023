@@ -14,7 +14,7 @@ pub trait StateMachine {
 }
 
 // Simple helper to do some hashing.
-fn hash<T: std::fmt::Debug>(t: &T) -> u64 where T: Hash{
+pub fn hash<T: std::fmt::Debug>(t: &T) -> u64 where T: Hash{
     // println!("bbbbbbb {:?}", &t);
     let mut hasher = DefaultHasher::new();
     let _ = &t.hash(&mut hasher);
